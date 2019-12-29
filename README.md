@@ -35,6 +35,9 @@ end
     # Tras hacer add y commit en un branch
     git push origin my-great-feature
     # Se puede confirmar el merge desde github
+
+    # Para actualizar tu codigo
+    git pull
 ```
 ### Comandos Rails
 
