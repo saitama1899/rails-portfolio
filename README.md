@@ -16,4 +16,14 @@ def new
     @blog = Blog.new
 end
 ```
+### Comandos GitHub
+- git init
+- git status
+- git add [file]
+- git add .
+- git commit -m 'Breve descripcion'
+- git remote add origin [url.git]
+- git push -u origin master
+- git branch
+- git checkout -b 'my-great-feature'
 
