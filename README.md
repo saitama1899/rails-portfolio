@@ -1,24 +1,19 @@
-# Portfolio para aprender Rails
+# Portfolio application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> Aplicación desarrollada con Ruby on Rails 6 que permite a los usuarios crear sus propios portfolios
 
-Things you may want to cover:
+### Features
 
-* Ruby version
+- Real time chat engine para los comentarios
+- Blog
+- Portfolio
+- Interfaz de arrastrar objetos en pantalla
 
-* System dependencies
+### Code Example
 
-* Configuration
+```ruby
+def new
+    @blog = Blog.new
+end
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
