@@ -32,4 +32,16 @@ end
     git checkout master
     git merge my-great-feature
 ```
+### Comandos Rails
+
+```bash
+    rails-h
+    rails new DevcampPortfolio
+    rails db:create
+    rails g scaffold Blog title:string body:text
+    rails db:migrate
+    rails s
+
+    rails g controller Pages home about contact
+```
 
