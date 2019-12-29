@@ -45,7 +45,10 @@ end
     rails -h
     rails new DevcampPortfolio
     rails db:create
+
+    # scaffold crea routes, model y view y controller CON codigo
     rails g scaffold Blog title:string body:text
+
     rails db:migrate
     rails s
 
@@ -58,5 +61,9 @@ end
     # La exclamacion te da feedback de errores
     > Skill.create!(title: "Ruby on Rails", percent_utilized: 75)
     > Skill.all
+
+    # resource crea routes, model y controler SIN codigo
+    rails g resource Portfolio title:string subtitle:string body:text main_image:text
+
 ```
 
