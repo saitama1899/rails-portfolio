@@ -18,7 +18,7 @@ end
 ```
 ### Comandos GitHub
 
-```git
+```bash
     git init
     git status
     git add .
@@ -50,5 +50,13 @@ end
     rails s
 
     rails g controller Pages home about contact
+
+    rails g model Skill title:string percent_utilized:integer
+
+    # Para insertar datos en la DB
+    rails c
+    # La exclamacion te da feedback de errores
+    > Skill.create!(title: "Ruby on Rails", percent_utilized: 75)
+    > Skill.all
 ```
 

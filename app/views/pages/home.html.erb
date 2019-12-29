@@ -1,5 +1,6 @@
 <h1>Homepage</h1>
 
+<h2>Entradas del blog</h2>
 <p id="notice"><%= notice %></p>
 <table>
   <thead>
@@ -26,3 +27,22 @@
 <br>
 
 <%= link_to 'New Blog', new_blog_path %>
+
+<h2>Skills</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Percent Utilized</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @skills.each do |skill| %>
+      <tr>
+        <td><%= skill.title %></td>
+        <td><%= skill.percent_utilized %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
