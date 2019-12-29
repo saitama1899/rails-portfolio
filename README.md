@@ -31,11 +31,15 @@ end
     git checkout -b 'my-great-feature'
     git checkout master
     git merge my-great-feature
+
+    # Tras hacer add y commit en un branch
+    git push origin my-great-feature
+    # Se puede confirmar el merge desde github
 ```
 ### Comandos Rails
 
 ```bash
-    rails-h
+    rails -h
     rails new DevcampPortfolio
     rails db:create
     rails g scaffold Blog title:string body:text
