@@ -26,4 +26,6 @@ end
 - git push -u origin master
 - git branch
 - git checkout -b 'my-great-feature'
+- git checkout master
+- 
 
