@@ -24,8 +24,13 @@ end
 - git commit -m 'Breve descripcion'
 - git remote add origin [url.git]
 - git push -u origin master
+
 - git branch
 - git checkout -b 'my-great-feature'
 - git checkout master
-- 
+- git merge my-great-feature
+
+```git
+    git init
+```
 
