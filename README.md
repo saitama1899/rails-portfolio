@@ -72,9 +72,8 @@ end
 
 ### Apuntes Rails
 
+> En archivos html.erb
 ```js
-    En archivos html.erb
-
     Porcesa la lógica de ruby sin renderizar nada
     <%  %>
 
@@ -83,4 +82,11 @@ end
 
     Para comentar inserciones de ruby
     <%#=  %>
+
+    Nos devuelve Url relativa
+    <%= new_portfolio_path %>
+
+    Url absoluta, Util en casos de subdominio y mandar la url via email
+    <%= new_portfolio_url %>
+
 ```
