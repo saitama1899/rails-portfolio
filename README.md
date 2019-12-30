@@ -76,6 +76,38 @@ end
 
 ```
 
+### Routes Rails
+
+```bash
+
+    # Para filtrar por consola las routes que queremos ver: 
+    rails routes | grep portfolio
+
+    # Para modificar una ruta que viene por defecto, except:
+    resources :portfolios, except: [:show]
+    # La queremos en singular, enlazada al action controller y asignando un nombre
+    # para poder utilizar el enlace en la vista como: portfolio_show_path(portfolio)
+    get 'portfolio/:id', to: 'portfolios#show', as: 'portfolio_show'
+
+```
+### DB Rails
+
+```bash
+
+    # Modificar una tabla existente
+    rails g migration add_fecha_to_blogs fecha:datetime
+
+    # Para añadir el slug con la gema friendly_id
+    rails g migration add_slug_to_blogs slug:string:uniq
+    # uniq para indicar que sea unico
+    # Guia completa de esta gema https://github.com/norman/friendly_id
+    # Para añadir slug a tablas ya existentes, modificar los modelos
+    # Para actualizar los datos ya existentes con el slug en Nil
+    # En la consola de rails c
+    Blog.find_each(&:save)   
+
+```
+
 ### Apuntes Rails
 
 > En archivos html.erb
