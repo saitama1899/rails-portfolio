@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :set_blog, only: [:show, :edit, :update, :destroy, :toggle_status]
   # Antes de cada accion de las indicadas ejecuta la función (action) set_blog 
 
   # GET /blogs
@@ -60,6 +60,12 @@ class BlogsController < ApplicationController
       format.html { redirect_to blogs_url, notice: 'Blog was successfully destroyed.' }
       # format.json { head :no_content }
     end
+  end
+
+  def toggle_status
+    # byebug
+    @blog.draft? ? @blog.published! : @blog.draft!
+    redirect_to blogs_url, notice: 'Post status actualizado.'
   end
 
   private

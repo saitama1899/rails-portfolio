@@ -116,6 +116,10 @@ end
     # Por defecto al crearlo es 0 (draft)
     > Blog.last.published!
     # Ahora el status es 1
+    # Para listar los publicados
+    > Blog.published
+    > Blog.published.count
+    
 
 
 ```
