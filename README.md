@@ -56,11 +56,17 @@ end
 
     rails g model Skill title:string percent_utilized:integer
 
-    # Para insertar datos en la DB
+    # Para manejar datos en la DB desde la consola de rails
     rails c
     # La exclamacion te da feedback de errores
     > Skill.create!(title: "Ruby on Rails", percent_utilized: 75)
     > Skill.all
+
+    > skill = Skill.last
+    # Borra el dato sin tener en cuenta callbacks
+    > skill.delete
+    # Primero ejecuta callbacks asociados y luego borra
+    > skill.destroy
 
     # resource crea routes, model y controler SIN codigo
     rails g resource Portfolio title:string subtitle:string body:text main_image:text
