@@ -30,5 +30,6 @@ puts "5 skills created"
 end
 
 puts "9 portfolio created"
+
 # Para inserciones mas pequeñas se puede usar la consola interactiva
 # de rails c

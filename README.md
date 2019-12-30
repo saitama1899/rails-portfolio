@@ -67,3 +67,14 @@ end
 
 ```
 
+### Apuntes Rails
+
+```js
+    En archivos html.erb
+
+    Porcesa la lógica de ruby sin renderizar nada
+    <%  %>
+
+    Permite renderizar variables
+    <%=  %>
+
