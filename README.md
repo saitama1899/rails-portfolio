@@ -65,6 +65,9 @@ end
     # resource crea routes, model y controler SIN codigo
     rails g resource Portfolio title:string subtitle:string body:text main_image:text
 
+    # Para filtrar por consola las routes que queremos ver: 
+    rails routes | grep portfolio
+
 ```
 
 ### Apuntes Rails
@@ -78,3 +81,6 @@ end
     Permite renderizar variables
     <%=  %>
 
+    Para comentar inserciones de ruby
+    <%#=  %>
+```

@@ -6,3 +6,6 @@ Rails.application.routes.draw do
   resources :blogs
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
+# Para filtrar por consola las routes que queremos ver: 
+# rails routes | grep portfolio
