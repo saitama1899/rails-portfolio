@@ -104,7 +104,19 @@ end
     # Para añadir slug a tablas ya existentes, modificar los modelos
     # Para actualizar los datos ya existentes con el slug en Nil
     # En la consola de rails c
-    Blog.find_each(&:save)   
+    > Blog.find_each(&:save)
+
+    # Una buena forma de indicar el estado de un post en borrador o publicado
+    rails g migration add_post_status_to_blogs status:integer
+    # Indicar que por default es 0 en la migracion.rb
+    add_column :blogs, :status, :integer, default: 0
+    rails db:migrate
+    # Añadir un enum al modelo:  enum status: { draft: 0, published: 1 }
+    > Blog.create!(title: "Blog title", body: "Blog body")
+    # Por defecto al crearlo es 0 (draft)
+    > Blog.last.published!
+    # Ahora el status es 1
+
 
 ```
 
@@ -126,5 +138,4 @@ end
 
     Url absoluta, Util en casos de subdominio y mandar la url via email
     <%= new_portfolio_url %>
-
 ```
