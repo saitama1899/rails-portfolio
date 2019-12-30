@@ -89,6 +89,14 @@ end
     # para poder utilizar el enlace en la vista como: portfolio_show_path(portfolio)
     get 'portfolio/:id', to: 'portfolios#show', as: 'portfolio_show'
 
+    # Añadir una ruta a blogs
+    resources :blogs do
+        member do
+        get :toggle_status
+        end
+    end
+    # Nombre del controller: toggle_status Ruta en vista: toggle_status_blog_path(blog)
+
 ```
 ### DB Rails
 
