@@ -1,6 +1,11 @@
 class PortfoliosController < ApplicationController
+    before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
+
     def index
         @portfolio_items = Portfolio.all
+    end
+
+    def show
     end
 
     def new
@@ -8,7 +13,6 @@ class PortfoliosController < ApplicationController
     end
 
     def edit
-        set_portfolio
     end
 
     def create 
@@ -24,8 +28,6 @@ class PortfoliosController < ApplicationController
     end
 
     def update
-        set_portfolio
-
         respond_to do |format|
           if @portfolio.update(portfolio_params)
             format.html { redirect_to portfolios_path, notice: 'Portfolio was successfully updated.' }
@@ -33,8 +35,11 @@ class PortfoliosController < ApplicationController
             format.html { render :edit }
           end
         end
-      end
+    end
 
+    def destroy
+    end
+    
     private
     # Use callbacks to share common setup or constraints between actions.
     def set_portfolio
