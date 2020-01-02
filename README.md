@@ -152,6 +152,14 @@ end
         Portfolio.ruby_on_rails
     end
     get 'ruby-on-rails-items', to: 'portfolios#ruby_on_rails' # En routes
+
+    # Defaults (asignar valores por defecto al crear una instancia)
+    after_initialize :set_defaults
+    # ||= Asigna el valor solo si antes era Nil
+    def set_defaults
+        self.main_image ||= "http://placehold.it/600x400"
+        self.thumb_image ||= "http://placehold.it/350x200"
+    end
 ```
 
 ### Apuntes Rails
