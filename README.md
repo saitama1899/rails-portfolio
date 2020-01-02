@@ -71,9 +71,6 @@ end
     # resource crea routes, model y controler SIN codigo
     rails g resource Portfolio title:string subtitle:string body:text main_image:text
 
-    # Para filtrar por consola las routes que queremos ver: 
-    rails routes | grep portfolio
-
 ```
 
 ### Routes Rails
@@ -96,6 +93,15 @@ end
         end
     end
     # Nombre del controller: toggle_status Ruta en vista: toggle_status_blog_path(blog)
+
+    # Para añadir un prefijo (namespace) a las rutas https://guides.rubyonrails.org/routing.html#controller-namespaces-and-routing
+    scope '/admin' do
+        resources :articles, :comments
+        get 'dashboard/user'
+    end
+
+    # Globbing para agrupar muchas url hacia un controlador
+    get 'posts/*missing', to: posts#missing
 
 ```
 ### DB Rails
