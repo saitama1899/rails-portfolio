@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_02_191553) do
+ActiveRecord::Schema.define(version: 2020_01_02_193608) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "title"
@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(version: 2020_01_02_191553) do
     t.text "badge"
   end
 
+  create_table "technologies", force: :cascade do |t|
+    t.string "name"
+    t.integer "portfolio_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["portfolio_id"], name: "index_technologies_on_portfolio_id"
+  end
+
   create_table "topics", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
@@ -60,4 +68,5 @@ ActiveRecord::Schema.define(version: 2020_01_02_191553) do
   end
 
   add_foreign_key "blogs", "topics"
+  add_foreign_key "technologies", "portfolios"
 end

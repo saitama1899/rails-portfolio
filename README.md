@@ -71,9 +71,6 @@ end
     # resource crea routes, model y controler SIN codigo
     rails g resource Portfolio title:string subtitle:string body:text main_image:text
 
-    # Para filtrar por consola las routes que queremos ver: 
-    rails routes | grep portfolio
-
 ```
 
 ### Routes Rails
@@ -136,6 +133,8 @@ end
     # En los modelos 
     blog.rb belongs_to :topic
     topic.rb has_many :blogs
+    # En consola puedes crear topic
+    > Topic.last.blogs.create!(title: "Titulo", body: "Body") 
 
     # Filtrar BD
     > Portfolio.where(subtitle: 'Ruby on Rails')
@@ -180,4 +179,22 @@ end
 
     Url absoluta, Util en casos de subdominio y mandar la url via email
     <%= new_portfolio_url %>
+```
+
+```bash
+# Concerns para compartir funciones comunes entre modelos
+# concerns/placeholder.rb
+module Placeholder
+    extend ActiveSupport::Concern
+
+    def self.image_generator(height:, width:)
+        "http://placehold.it/#{height}x#{width}"
+    end
+end
+# En el modelo
+    include Placeholder
+
+    def set_defaults
+        self.badge ||= Placeholder.image_generator(height: '250', width: '250')
+    end
 ```

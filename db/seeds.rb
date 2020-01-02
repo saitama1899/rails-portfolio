@@ -42,5 +42,13 @@ end
     )
 end
 
+3.times do |technology|
+    Portfolio.last.technologies.create!(
+        name: "Technology # #{technology}"
+    )
+end
+
+
+
 # Para inserciones mas pequeñas se puede usar la consola interactiva
 # de rails c
