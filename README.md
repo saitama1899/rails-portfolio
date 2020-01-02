@@ -137,6 +137,21 @@ end
     blog.rb belongs_to :topic
     topic.rb has_many :blogs
 
+    # Filtrar BD
+    > Portfolio.where(subtitle: 'Ruby on Rails')
+    # Scope para filtrar datos (en el model)
+    def self.angular
+        where(subtitle: 'Angular')
+    end
+    # Otra manera de crear un scope 
+    scope :ruby_on_rails, -> { where(subtitle: 'Ruby on Rails') }
+    # (En el controler)
+    Portfolio.ruby_on_rails
+    # Para asociarlo a una url concreta (creando la vista)
+    def ruby_on_rails
+        Portfolio.ruby_on_rails
+    end
+    get 'ruby-on-rails-items', to: 'portfolios#ruby_on_rails' # En routes
 ```
 
 ### Apuntes Rails

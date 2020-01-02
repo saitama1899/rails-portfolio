@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # para poder utilizar el enlace en la vista como: portfolio_show_path(portfolio)
   get 'portfolio/:id', to: 'portfolios#show', as: 'portfolio_show'
   
+  get 'ruby-on-rails-items', to: 'portfolios#ruby_on_rails'
+  
   # Añadir una ruta a blogs
   resources :blogs do
     member do
