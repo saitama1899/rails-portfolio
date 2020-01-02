@@ -136,6 +136,12 @@ end
     # En consola puedes crear topic
     > Topic.last.blogs.create!(title: "Titulo", body: "Body") 
 
+    # Para indicar atributos heredados
+    has_many :technologies
+    accepts_nested_attributes_for :technologies, 
+                                   reject_if: lambda { |attrs| attrs['name'].blank? } # Validacion
+    > Portfolio.create!(title: 'Web app', subtitle: 'sadasd', body: 'asdasd',technologies_attributes: [{name: 'Ruby'},{name: 'Rails' },{name: 'Angular'}, {name: 'Ionic'}])
+    
     # Filtrar BD
     > Portfolio.where(subtitle: 'Ruby on Rails')
     # Scope para filtrar datos (en el model)
