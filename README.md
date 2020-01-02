@@ -128,7 +128,8 @@ end
     > Blog.published
     > Blog.published.count
     
-
+    # Para impedir la creacion de entradas con campos vacios 
+    validates_presence_of :title, :body # (en el model)
 
 ```
 
