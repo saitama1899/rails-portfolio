@@ -5,5 +5,7 @@ class Blog < ApplicationRecord
     friendly_id :title, use: :slugged
 
     # Para impedir la creacion de entradas con campos vacios 
-    validates_presence_of :title, :body 
+    validates_presence_of :title, :body
+    
+    belongs_to :topic
 end

@@ -128,8 +128,14 @@ end
     > Blog.published
     > Blog.published.count
     
-    # Para impedir la creacion de entradas con campos vacios 
+    # Para impedir la creacion de entradas con campos vacios (validaciones)
     validates_presence_of :title, :body # (en el model)
+
+    # Crear relacion has_many entre Blog y Topic
+    rails g migration add_topic_reference_to_blogs topic:references
+    # En los modelos 
+    blog.rb belongs_to :topic
+    topic.rb has_many :blogs
 
 ```
 
