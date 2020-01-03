@@ -154,6 +154,7 @@ end
         </li>
         <% end %>
     </ul>
+
     # Filtrar BD
     > Portfolio.where(subtitle: 'Ruby on Rails')
     # Scope para filtrar datos (en el model)
@@ -177,8 +178,87 @@ end
         self.main_image ||= "http://placehold.it/600x400"
         self.thumb_image ||= "http://placehold.it/350x200"
     end
-```
 
+    # Usar SQL en consola
+    > Book.find_by_sql("SELECT books.* FROM books")
+    # Otras querys
+    > Book.where(title: "The force") # Devuelve siempre una coleccion (clase active record de book)
+    > Book.where(title: "The force").first.author # Devuelve el autor
+    > Book.find_by_title("The force") # Puede devolver un solo dato (clase book)
+    > Book.find_by_title("The force").author
+    # Estos metodos (como find_by_title) los crea Rails durante la compilacion basandose en los atributos
+    > luke = Author.find_by_name("Luke")
+    > luke.books.any? # true o false
+    > luke.books.sum(:sales) # Suma una venta al libro
+    > Book.average(:sales).to_f # Media
+    > Book.maximum(:sales) # Numero mas alto
+    > Book.order("sales DESC") # Ordenar DESC
+    > Book.order("sales DESC").first # Numero mas alto
+    > Genre.pluck(:name) # Todos los nombres
+
+    # Ahorrar tiempo listando items en el controller con modelos relacionados
+    # @portfolios = Portfolio.all
+    @portfolios = Portfolio.includes(:technologies)
+```
+### Authentication Rails con gema Devise
+
+```bash
+# https://github.com/plataformatec/devise
+
+# En gemfile
+gem 'devise', '~> 4.2'
+
+bundle install
+
+rails g devise:install
+
+# Seguir instrucciones de consola
+
+# Crear el user para tener rutas y modelo
+rails g devise user
+
+# Puedes modificar el modelo y los campos del migration file antes del db:migrate
+rails db:migrate
+
+# Para cambiar el nombre a rutas por defecto path: '', path_names: {}
+# devise_for :users
+devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+
+# Header en layout
+<% if current_user %>
+    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+<% else %>
+    <%= link_to "Register", new_user_registration_path %>
+    <%= link_to "Login", new_user_session_path %>
+<% end %>
+
+# Para permitir el campo personalizado name
+# En aplication controller
+before_filter :configure_permitted_params, if: :devise_controller? 
+
+def configure_permitted_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+end
+# En la vista
+<div class="field">
+<%= f.label :name %><br />
+<%= f.text_field :name, autocomplete: "name" %>
+</div>
+
+# Crear atributos virtuales (sin migration)
+# En el modelo user.rb
+validates_presence_of :name
+
+def first_name
+    self.name.split.first
+end
+
+def last_name
+    self.name.split.last
+end
+
+```
 ### Apuntes Rails
 
 > En archivos html.erb

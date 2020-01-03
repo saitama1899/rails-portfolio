@@ -20,6 +20,12 @@ Rails.application.routes.draw do
     end
   end
 
+  # Authentication
+  # devise_for :users
+  # Para cambiar el nombre a rutas por defecto path: '', path_names: {}
+  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+
+
 end
 
 # Para filtrar por consola las routes que queremos ver: 
