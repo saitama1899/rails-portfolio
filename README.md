@@ -36,7 +36,7 @@ end
     git push origin my-great-feature
     # Se puede confirmar el merge desde github
 
-    # Para actualizar tu codigo
+    # Actualizar tu codigo
     git pull
 ```
 ### Comandos Rails
@@ -46,7 +46,7 @@ end
     rails new DevcampPortfolio
     rails db:create
 
-    # scaffold crea routes, model y view y controller CON codigo
+    ### scaffold crea routes, model y view y controller CON codigo
     rails g scaffold Blog title:string body:text
 
     rails db:migrate
@@ -56,7 +56,7 @@ end
 
     rails g model Skill title:string percent_utilized:integer
 
-    # Para manejar datos en la DB desde la consola de rails
+    ### Manejar datos en la DB desde la consola de rails
     rails c
     # La exclamacion te da feedback de errores
     > Skill.create!(title: "Ruby on Rails", percent_utilized: 75)
@@ -68,7 +68,7 @@ end
     # Primero ejecuta callbacks asociados y luego borra
     > skill.destroy
 
-    # resource crea routes, model y controler SIN codigo
+    ### resource crea routes, model y controler SIN codigo
     rails g resource Portfolio title:string subtitle:string body:text main_image:text
 
 ```
@@ -77,16 +77,16 @@ end
 
 ```bash
 
-    # Para filtrar por consola las routes que queremos ver: 
+    ### Filtrar por consola las routes que queremos ver: 
     rails routes | grep portfolio
 
-    # Para modificar una ruta que viene por defecto, except:
+    ### Modificar una ruta que viene por defecto, except:
     resources :portfolios, except: [:show]
     # La queremos en singular, enlazada al action controller y asignando un nombre
     # para poder utilizar el enlace en la vista como: portfolio_show_path(portfolio)
     get 'portfolio/:id', to: 'portfolios#show', as: 'portfolio_show'
 
-    # Añadir una ruta a blogs
+    ### Añadir una ruta a blogs
     resources :blogs do
         member do
         get :toggle_status
@@ -99,10 +99,10 @@ end
 
 ```bash
 
-    # Modificar una tabla existente
+    ### Modificar una tabla existente
     rails g migration add_fecha_to_blogs fecha:datetime
 
-    # Para añadir el slug con la gema friendly_id
+    ### Añadir el slug con la gema friendly_id
     rails g migration add_slug_to_blogs slug:string:uniq
     # uniq para indicar que sea unico
     # Guia completa de esta gema https://github.com/norman/friendly_id
@@ -111,7 +111,7 @@ end
     # En la consola de rails c
     > Blog.find_each(&:save)
 
-    # Una buena forma de indicar el estado de un post en borrador o publicado
+    ### Indicar el estado de un post en borrador o publicado con enum
     rails g migration add_post_status_to_blogs status:integer
     # Indicar que por default es 0 en la migracion.rb
     add_column :blogs, :status, :integer, default: 0
@@ -125,7 +125,7 @@ end
     > Blog.published
     > Blog.published.count
     
-    # Para impedir la creacion de entradas con campos vacios (validaciones)
+    ### Impedir la creacion de entradas con campos vacios (validaciones)
     validates_presence_of :title, :body # (en el model)
 
     # Crear relacion has_many entre Blog y Topic
@@ -136,7 +136,7 @@ end
     # En consola puedes crear topic
     > Topic.last.blogs.create!(title: "Titulo", body: "Body") 
 
-    # Para indicar atributos heredados
+    ### Indicar atributos heredados
     has_many :technologies
     accepts_nested_attributes_for :technologies, 
                                    reject_if: lambda { |attrs| attrs['name'].blank? } # Validacion
@@ -155,7 +155,7 @@ end
         <% end %>
     </ul>
 
-    # Filtrar BD
+    ### Filtrar BD
     > Portfolio.where(subtitle: 'Ruby on Rails')
     # Scope para filtrar datos (en el model)
     def self.angular
@@ -171,7 +171,7 @@ end
     end
     get 'ruby-on-rails-items', to: 'portfolios#ruby_on_rails' # En routes
 
-    # Defaults (asignar valores por defecto al crear una instancia)
+    ### Defaults (asignar valores por defecto al crear una instancia)
     after_initialize :set_defaults
     # ||= Asigna el valor solo si antes era Nil
     def set_defaults
@@ -179,7 +179,7 @@ end
         self.thumb_image ||= "http://placehold.it/350x200"
     end
 
-    # Usar SQL en consola
+    ### Usar SQL en consola
     > Book.find_by_sql("SELECT books.* FROM books")
     # Otras querys
     > Book.where(title: "The force") # Devuelve siempre una coleccion (clase active record de book)
@@ -196,68 +196,99 @@ end
     > Book.order("sales DESC").first # Numero mas alto
     > Genre.pluck(:name) # Todos los nombres
 
-    # Ahorrar tiempo listando items en el controller con modelos relacionados
+    ### Ahorrar tiempo de las queries listando items en el controller con modelos relacionados
     # @portfolios = Portfolio.all
     @portfolios = Portfolio.includes(:technologies)
 ```
 ### Authentication Rails con gema Devise
 
 ```bash
-# https://github.com/plataformatec/devise
+    # https://github.com/plataformatec/devise
+    ### Instalacion
+    # En gemfile
+    gem 'devise', '~> 4.2'
+    bundle install
+    rails g devise:install
+    # Seguir instrucciones de consola
+    # Crear el user para tener rutas y modelo
+    rails g devise user
+    # Puedes modificar el modelo y los campos del migration file antes del db:migrate
+    rails db:migrate
 
-# En gemfile
-gem 'devise', '~> 4.2'
+    ### Cambiar el nombre a rutas por defecto path: '', path_names: {}
+    # devise_for :users
+    devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
-bundle install
+    ### Header en layout
+    <% if current_user %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+    <% else %>
+        <%= link_to "Register", new_user_registration_path %>
+        <%= link_to "Login", new_user_session_path %>
+    <% end %>
 
-rails g devise:install
+    ### Permitir el campo personalizado name
+    # En aplication controller
+    before_filter :configure_permitted_params, if: :devise_controller? 
 
-# Seguir instrucciones de consola
+    def configure_permitted_params
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+        devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    end
+    # En la vista
+    <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autocomplete: "name" %>
+    </div>
 
-# Crear el user para tener rutas y modelo
-rails g devise user
+    ### Crear atributos virtuales (sin migration)
+    # En el modelo user.rb
+    validates_presence_of :name
 
-# Puedes modificar el modelo y los campos del migration file antes del db:migrate
-rails db:migrate
+    def first_name
+        self.name.split.first
+    end
 
-# Para cambiar el nombre a rutas por defecto path: '', path_names: {}
-# devise_for :users
-devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+    def last_name
+        self.name.split.last
+    end
 
-# Header en layout
-<% if current_user %>
-    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-<% else %>
-    <%= link_to "Register", new_user_registration_path %>
-    <%= link_to "Login", new_user_session_path %>
-<% end %>
+    ### Crear usuarios guests con ostruct
+    gem install ostruct
+    # Sobreescribir este metodo de Devise para poder tener user guests y que siempre exista un current_user
+    def current_user
+        super || guest_user
+    end
+    # Esto funciona como una condicion if (false || true) siempre devuelve true. Si current_user existe se ejecuta super, la funcion padre. Si no existe, se ejecuta la creacion del Guest clonando los campos de un usuario para que nada sea Nil
+    def guest_user
+        OpenStruct.new(name: "Visitante Usuario", 
+            first_name: "Visitante",
+            last_name: "Usuario",
+            email: "visitante@usuario.com"
+            )
+    end
+    # En la vista (layout header)
+    <p>Hola, <%= current_user.first_name %></p>
+    <% if current_user.is_a?(User) %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Register", new_user_registration_path %>
+      <%= link_to "Login", new_user_session_path %>
+    <% end %>
+```
+### Rails Sessions
 
-# Para permitir el campo personalizado name
-# En aplication controller
-before_filter :configure_permitted_params, if: :devise_controller? 
+```bash
+    ### Crear una sesion en el aplication controller
+    before_action :set_source
 
-def configure_permitted_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
-end
-# En la vista
-<div class="field">
-<%= f.label :name %><br />
-<%= f.text_field :name, autocomplete: "name" %>
-</div>
-
-# Crear atributos virtuales (sin migration)
-# En el modelo user.rb
-validates_presence_of :name
-
-def first_name
-    self.name.split.first
-end
-
-def last_name
-    self.name.split.last
-end
-
+    def set_source
+        session[:source] = params[:q] if params[:q]
+    end
+    # Para acceder en la vista
+    <% if session[:source] %>
+      <p>Gracias por visitarnos desde <%= session[:source] %></p>
+    <% end %>
 ```
 ### Apuntes Rails
 
