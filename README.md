@@ -154,6 +154,7 @@ end
         </li>
         <% end %>
     </ul>
+
     # Filtrar BD
     > Portfolio.where(subtitle: 'Ruby on Rails')
     # Scope para filtrar datos (en el model)
@@ -177,8 +178,35 @@ end
         self.main_image ||= "http://placehold.it/600x400"
         self.thumb_image ||= "http://placehold.it/350x200"
     end
-```
 
+    # Usar SQL en consola
+    > Book.find_by_sql("SELECT books.* FROM books")
+    # Otras querys
+    > Book.where(title: "The force") # Devuelve siempre una coleccion (clase active record de book)
+    > Book.where(title: "The force").first.author # Devuelve el autor
+    > Book.find_by_title("The force") # Puede devolver un solo dato (clase book)
+    > Book.find_by_title("The force").author
+    # Estos metodos (como find_by_title) los crea Rails durante la compilacion basandose en los atributos
+    > luke = Author.find_by_name("Luke")
+    > luke.books.any? # true o false
+    > luke.books.sum(:sales) # Suma una venta al libro
+    > Book.average(:sales).to_f # Media
+    > Book.maximum(:sales) # Numero mas alto
+    > Book.order("sales DESC") # Ordenar DESC
+    > Book.order("sales DESC").first # Numero mas alto
+    > Genre.pluck(:name) # Todos los nombres
+
+    # Ahorrar tiempo listando items en el controller con modelos relacionados
+    # @portfolios = Portfolio.all
+    @portfolios = Portfolio.includes(:technologies)
+```
+### Authentication Rails con gema Devise
+
+```bash
+
+
+
+```
 ### Apuntes Rails
 
 > En archivos html.erb

@@ -41,4 +41,10 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+########## Añadidos por mi
+
+# Slug para cambiar el id de las rutas por un string
 gem 'friendly_id', '~> 5.2.4'
+
+# Authentication
+gem 'devise', '~> 4.2'
