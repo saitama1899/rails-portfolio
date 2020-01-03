@@ -7,5 +7,6 @@ class ApplicationController < ActionController::Base
     include SetSource
     # Para los guests
     include CurrentUserConcern
-
+    # Para los datos de la pagina como title
+    include DefaultPageContent
 end

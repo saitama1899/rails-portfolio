@@ -4,9 +4,11 @@ class PortfoliosController < ApplicationController
     def index
         # @portfolio_items = Portfolio.all
         @portfolio_items = Portfolio.includes(:technologies)
+        @page_title = "My Portfolios"
     end
 
     def show
+      @page_title = @portfolio.title
     end
 
     def new

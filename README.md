@@ -308,6 +308,20 @@ end
 
     Url absoluta, Util en casos de subdominio y mandar la url via email
     <%= new_portfolio_url %>
+
+    // Title dinamico entre paginas
+    // En el application controller
+    before_action :set_title
+
+    def set_title
+        @page_title = "Portfolio Eric Selva"
+    end
+    // En Layout principal
+    <title><%= @page_title %></title>
+    // En las acciones de los controladores
+    def index
+        @page_title = "My Portfolios"
+    end
 ```
 
 ```bash
