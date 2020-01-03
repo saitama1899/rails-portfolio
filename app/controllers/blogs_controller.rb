@@ -2,6 +2,9 @@ class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy, :toggle_status]
   # Antes de cada accion de las indicadas ejecuta la función (action) set_blog 
 
+  # Cambiar a layout personalizado
+  layout "blog"
+
   # GET /blogs
   # GET /blogs.json
   def index
