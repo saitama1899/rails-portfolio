@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
+    ### include de Concerns para tener codigo modular
+    
+    # Para permitir parametros personalizados en los formularios de devise auth
     include DeviseWhitelist
-
-    before_action :set_source
-
-    def set_source
-        session[:source] = params[:q] if params[:q]
-    end
+    # Para crear la variable de session source
+    include SetSource
+    
 end

@@ -259,6 +259,20 @@ def last_name
 end
 
 ```
+### Rails Sessions
+
+```bash
+    # Para crear una sesion en el aplication controller
+    before_action :set_source
+
+    def set_source
+        session[:source] = params[:q] if params[:q]
+    end
+    # Para acceder en la vista
+    <% if session[:source] %>
+      <p>Gracias por visitarnos desde <%= session[:source] %></p>
+    <% end %>
+```
 ### Apuntes Rails
 
 > En archivos html.erb
