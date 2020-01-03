@@ -71,9 +71,6 @@ end
     # resource crea routes, model y controler SIN codigo
     rails g resource Portfolio title:string subtitle:string body:text main_image:text
 
-    # Para filtrar por consola las routes que queremos ver: 
-    rails routes | grep portfolio
-
 ```
 
 ### Routes Rails
@@ -128,8 +125,58 @@ end
     > Blog.published
     > Blog.published.count
     
+    # Para impedir la creacion de entradas con campos vacios (validaciones)
+    validates_presence_of :title, :body # (en el model)
 
+    # Crear relacion has_many entre Blog y Topic
+    rails g migration add_topic_reference_to_blogs topic:references
+    # En los modelos 
+    blog.rb belongs_to :topic
+    topic.rb has_many :blogs
+    # En consola puedes crear topic
+    > Topic.last.blogs.create!(title: "Titulo", body: "Body") 
 
+    # Para indicar atributos heredados
+    has_many :technologies
+    accepts_nested_attributes_for :technologies, 
+                                   reject_if: lambda { |attrs| attrs['name'].blank? } # Validacion
+    > Portfolio.create!(title: 'Web app', subtitle: 'sadasd', body: 'asdasd',technologies_attributes: [{name: 'Ruby'},{name: 'Rails' },{name: 'Angular'}, {name: 'Ionic'}])
+    # Para mostrarlos en el formulario
+    def new # En el controller
+        @portfolio = Portfolio.new
+        3.times { @portfolio.technologies.build }
+    end
+    <ul> # En la vista
+        <%= form.fields_for :technologies do |technology_form| %>
+        <li>
+            <%= technology_form.label :name %>
+            <%= technology_form.text_field :name %>
+        </li>
+        <% end %>
+    </ul>
+    # Filtrar BD
+    > Portfolio.where(subtitle: 'Ruby on Rails')
+    # Scope para filtrar datos (en el model)
+    def self.angular
+        where(subtitle: 'Angular')
+    end
+    # Otra manera de crear un scope 
+    scope :ruby_on_rails, -> { where(subtitle: 'Ruby on Rails') }
+    # (En el controler)
+    Portfolio.ruby_on_rails
+    # Para asociarlo a una url concreta (creando la vista)
+    def ruby_on_rails
+        Portfolio.ruby_on_rails
+    end
+    get 'ruby-on-rails-items', to: 'portfolios#ruby_on_rails' # En routes
+
+    # Defaults (asignar valores por defecto al crear una instancia)
+    after_initialize :set_defaults
+    # ||= Asigna el valor solo si antes era Nil
+    def set_defaults
+        self.main_image ||= "http://placehold.it/600x400"
+        self.thumb_image ||= "http://placehold.it/350x200"
+    end
 ```
 
 ### Apuntes Rails
@@ -150,4 +197,22 @@ end
 
     Url absoluta, Util en casos de subdominio y mandar la url via email
     <%= new_portfolio_url %>
+```
+
+```bash
+    # Concerns para compartir funciones comunes entre modelos
+    # concerns/placeholder.rb
+    module Placeholder
+        extend ActiveSupport::Concern
+
+        def self.image_generator(height:, width:)
+            "http://placehold.it/#{height}x#{width}"
+        end
+    end
+    # En el modelo
+    include Placeholder
+
+    def set_defaults
+        self.badge ||= Placeholder.image_generator(height: '250', width: '250')
+    end
 ```

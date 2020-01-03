@@ -10,6 +10,7 @@ class PortfoliosController < ApplicationController
 
     def new
         @portfolio = Portfolio.new
+        3.times { @portfolio.technologies.build }
     end
 
     def edit
@@ -44,6 +45,10 @@ class PortfoliosController < ApplicationController
         end
     end
     
+    def ruby_on_rails
+        @portfolio_items = Portfolio.ruby_on_rails
+    end
+
     private
     # Use callbacks to share common setup or constraints between actions.
     def set_portfolio
@@ -52,7 +57,7 @@ class PortfoliosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def portfolio_params
-      params.require(:portfolio).permit(:title, :subtitle, :body)
+      params.require(:portfolio).permit(:title, :subtitle, :body, technologies_attributes: [:name])
     end
 
 end
