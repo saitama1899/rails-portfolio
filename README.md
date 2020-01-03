@@ -224,6 +224,14 @@ rails db:migrate
 # devise_for :users
 devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
+# Header en layout
+<% if current_user %>
+    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+<% else %>
+    <%= link_to "Register", new_user_registration_path %>
+    <%= link_to "Login", new_user_session_path %>
+<% end %>
+
 ```
 ### Apuntes Rails
 
