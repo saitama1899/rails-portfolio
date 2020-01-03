@@ -203,8 +203,22 @@ end
 ### Authentication Rails con gema Devise
 
 ```bash
+# https://github.com/plataformatec/devise
 
+# En gemfile
+gem 'devise', '~> 4.2'
 
+bundle install
+
+rails g devise:install
+
+# Seguir instrucciones de consola
+
+# Crear el user para tener rutas y modelo
+rails g devise user
+
+# Puedes modificar el modelo y los campos del migration file antes del db:migrate
+rails db:migrate
 
 ```
 ### Apuntes Rails
