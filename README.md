@@ -141,7 +141,19 @@ end
     accepts_nested_attributes_for :technologies, 
                                    reject_if: lambda { |attrs| attrs['name'].blank? } # Validacion
     > Portfolio.create!(title: 'Web app', subtitle: 'sadasd', body: 'asdasd',technologies_attributes: [{name: 'Ruby'},{name: 'Rails' },{name: 'Angular'}, {name: 'Ionic'}])
-    
+    # Para mostrarlos en el formulario
+    def new # En el controller
+        @portfolio = Portfolio.new
+        3.times { @portfolio.technologies.build }
+    end
+    <ul> # En la vista
+        <%= form.fields_for :technologies do |technology_form| %>
+        <li>
+            <%= technology_form.label :name %>
+            <%= technology_form.text_field :name %>
+        </li>
+        <% end %>
+    </ul>
     # Filtrar BD
     > Portfolio.where(subtitle: 'Ruby on Rails')
     # Scope para filtrar datos (en el model)
@@ -188,16 +200,16 @@ end
 ```
 
 ```bash
-# Concerns para compartir funciones comunes entre modelos
-# concerns/placeholder.rb
-module Placeholder
-    extend ActiveSupport::Concern
+    # Concerns para compartir funciones comunes entre modelos
+    # concerns/placeholder.rb
+    module Placeholder
+        extend ActiveSupport::Concern
 
-    def self.image_generator(height:, width:)
-        "http://placehold.it/#{height}x#{width}"
+        def self.image_generator(height:, width:)
+            "http://placehold.it/#{height}x#{width}"
+        end
     end
-end
-# En el modelo
+    # En el modelo
     include Placeholder
 
     def set_defaults
