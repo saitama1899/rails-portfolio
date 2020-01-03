@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  devise_for :users
   root to: 'pages#home'
 
   get 'about-me', to: 'pages#about'
@@ -20,6 +19,12 @@ Rails.application.routes.draw do
       get :toggle_status
     end
   end
+
+  # Authentication
+  # devise_for :users
+  # Para cambiar el nombre a rutas por defecto path: '', path_names: {}
+  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+
 
 end
 
