@@ -5,5 +5,7 @@ class ApplicationController < ActionController::Base
     include DeviseWhitelist
     # Para crear la variable de session source
     include SetSource
-    
+    # Para los guests
+    include CurrentUserConcern
+
 end
