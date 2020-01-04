@@ -1,4 +1,4 @@
-# Portfolio application
+# Portfolio Blog - Aprendiendo Rails
 
 > Aplicación desarrollada con Ruby on Rails 6 que permite a los usuarios crear sus propios portfolios
 
@@ -390,10 +390,24 @@ end
     # Y crear un _blog_ruler.html.erb con <br>
 ```
 
-### Debug
+### Debugging 
 
 ```bash
+    ### puts para ver en consola del servidor
+    def index
+        @blogs = Blog.last
+        puts "*" * 500
+        puts @blogs.inspect
+        puts "*" * 500
+    end
 
+    ### byebug
+    byebug
+    # Te da un breakpoint donde la aplicacion se congelara y poder operar desde la consola dinamicamente y comprabar valores
+
+    ### pry
+    # Hay que instalar la gema
+    binding.pry
 ```
 
 ### Comandos GitHub
