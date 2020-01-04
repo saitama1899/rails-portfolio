@@ -289,49 +289,47 @@ end
 ```
 ### Vistas Rails
 
-> En archivos html.erb
-```js
-    Porcesa la lógica de ruby sin renderizar nada
+```ruby
+    ### Porcesa la lógica de ruby sin renderizar nada
     <%  %>
 
-    Permite renderizar variables
+    # Permite renderizar variables
     <%=  %>
 
-    Para comentar inserciones de ruby
+    ### Para comentar inserciones de ruby
     <%#=  %>
 
-    Nos devuelve Url relativa
+    # Nos devuelve Url relativa
     <%= new_portfolio_path %>
 
-    Url absoluta, Util en casos de subdominio y mandar la url via email
+    # Url absoluta, Util en casos de subdominio y mandar la url via email
     <%= new_portfolio_url %>
 
-    // Title dinamico entre paginas
-    // En el application controller
+    ### Title dinamico entre paginas
+    # En el application controller
     before_action :set_title
 
     def set_title
         @page_title = "Portfolio Eric Selva"
     end
-    // En Layout principal
+    ### En Layout principal
     <title><%= @page_title %></title>
-    // En las acciones de los controladores
+    # En las acciones de los controladores
     def index
         @page_title = "My Portfolios"
     end
 
-    // Pasar parametros por los render (por ejemplo en el Nav bar)
-    // _nav.html.erb
+    ### Pasar parametros por los render (por ejemplo en el Nav bar)
+    # _nav.html.erb
     <div class = "<%= location %>">
         <div><%= link_to "Inicio", root_path %></div>
         <div><%= link_to "Sobre Mi", about_me_path %></div>
     </div>
-    // En el layout deseado (por ejemplo blog)
+    # En el layout deseado (por ejemplo blog)
     <%= render "shared/nav", location: "bottom" %>
-    // Indicar layout en el controller de blog
-    layout "blog"
+    ### Indicar layout en el controller de blog layout "blog"
 
-    // Puedes utilizar el helper para la logica de ruby en las vistas
+    ### Puedes utilizar el helper para la logica de ruby en las vistas
     def login_helper
         if current_user.is_a?(User)
             link_to "Logout", destroy_user_session_path, method: :delete
@@ -341,28 +339,52 @@ end
             (link_to "Login", new_user_session_path)
         end
     end
-    // En la vista
+    # En la vista
     <%= login_helper %>
 
-    // ¿Cuando usar render y cuando el helper? (Una metodologia de hacerlo)
-    // Render: Cuando el codigo contiene en su mayoria html
-    // Helper: Cuando contiene en su mayoria Ruby y condicionales
+    ### ¿Cuando usar render y cuando el helper? (Una metodologia de hacerlo)
+    # Render: Cuando el codigo contiene en su mayoria html
+    # Helper: Cuando contiene en su mayoria Ruby y condicionales
     
-    // Ejemplo de refactorizacion de codigo de vista a helper
-    // Vista
+    ### Ejemplo de refactorizacion de codigo de vista a helper
+    # Vista
     <% if session[:source] %>
       <p>Gracias por visitarnos desde <%= session[:source] %></p>
     <% end %>
-    // Helper
+    # Helper
     def source_helper
         if session[:source]
             greeting = "Gracias por visitarnos desde #{session[:source]}"
             content_tag(:p, greeting, class: "source-greeting")
         end
     end
-    // Vista (post refactorizacion)
+    # Vista (post refactorizacion)
     <%= source_helper %>
-    
+
+    ### Shortcut para renderizar la iteracion de blogs en la vista sin necesitad de bucle each do
+    <table>
+        <thead>
+            <tr>
+            <th>Title</th>
+            <th>Body</th>
+            <th colspan="4"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <%= render @blogs %>
+        </tbody>
+    </table>
+    # En plantilla _blog.html.erb
+    <tr>
+        <td><%= blog.title.upcase %></td>
+        <td><%= blog.body %></td>
+        <td><%= link_to blog.status, toggle_status_blog_path(blog) %></td>
+        <td><%= link_to 'Show', blog %></td>
+        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr> 
+
 ```
 
 ### Comandos GitHub
