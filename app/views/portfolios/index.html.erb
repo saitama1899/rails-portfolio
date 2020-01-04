@@ -2,4 +2,4 @@
 
 <%= link_to 'Nuevo portfolio', new_portfolio_path %>
 
-<%= render @portfolio_items %>
+<%= render partial: @portfolio_items, spacer_template: 'portfolio_ruler' %>

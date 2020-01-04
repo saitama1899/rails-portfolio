@@ -17,7 +17,7 @@ def new
 end
 ```
 
-##### Rails
+# Rails
 
 ### Comandos Rails
 
@@ -384,6 +384,15 @@ end
         <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
         <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr> 
+
+    ### Añadir espacio entre cada iteracion
+    <%= render partial: @blogs, spacer_template: 'blog_ruler' %>
+    # Y crear un _blog_ruler.html.erb con <br>
+```
+
+### Debug
+
+```bash
 
 ```
 
