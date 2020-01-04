@@ -289,8 +289,8 @@ end
 ```
 ### Vistas Rails
 
-```haml
-    ### Porcesa la lógica de ruby sin renderizar nadaa
+```liquid
+    ### Porcesa la lógica de ruby sin renderizar nada
     <%  %>
 
     # Permite renderizar variables
