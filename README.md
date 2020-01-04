@@ -289,8 +289,8 @@ end
 ```
 ### Vistas Rails
 
-```ruby
-    ### Porcesa la lógica de ruby sin renderizar nada
+```erb
+    ### Porcesa la lógica de ruby sin renderizar nadaa
     <%  %>
 
     # Permite renderizar variables
