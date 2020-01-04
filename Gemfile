@@ -48,3 +48,6 @@ gem 'friendly_id', '~> 5.2.4'
 
 # Authentication
 gem 'devise', '~> 4.2'
+
+# Bootstrap
+gem 'bootstrap', '~> 4.4.1'

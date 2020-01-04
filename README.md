@@ -409,6 +409,16 @@ end
     # Hay que instalar la gema
     binding.pry
 ```
+### Gems 
+
+```bash
+    ### En los initializers se pueden sobreescribir funciones de las gemas
+    
+    ### No se puede modificar directamente el codigo de gemas como Bootstrap
+
+    
+    
+```
 
 ### Comandos GitHub
 
