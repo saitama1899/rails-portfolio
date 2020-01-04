@@ -333,6 +333,24 @@ end
     <%= render "shared/nav", location: "bottom" %>
     // Indicar layout en el controller de blog
     layout "blog"
+
+    // Puedes utilizar el helper para la logica de ruby en las vistas
+    def login_helper
+        if current_user.is_a?(User)
+            link_to "Logout", destroy_user_session_path, method: :delete
+        else
+            (link_to "Register", new_user_registration_path) + // Los parentesis son necesarios para concatenar y que renderice todas las lienas
+            "<br>".html_safe +
+            (link_to "Login", new_user_session_path)
+        end
+    end
+    // En la vista
+    <%= login_helper %>
+
+    // ¿Cuando usar render y cuando el helper? (Una metodologia de hacerlo)
+    // Render: Cuando el codigo contiene en su mayoria html
+    // Helper: Cuando contiene en su mayoria Ruby y condicionales
+    
 ```
 
 ```bash
