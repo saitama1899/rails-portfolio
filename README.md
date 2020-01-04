@@ -289,7 +289,7 @@ end
 ```
 ### Vistas Rails
 
-```erb
+```haml
     ### Porcesa la lógica de ruby sin renderizar nadaa
     <%  %>
 
