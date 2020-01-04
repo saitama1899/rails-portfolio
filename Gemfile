@@ -51,3 +51,6 @@ gem 'devise', '~> 4.2'
 
 # Bootstrap
 gem 'bootstrap', '~> 4.4.1'
+
+# Mi gema personal
+gem 'eric_selva_view_tool', git: 'https://github.com/saitama1899/eric_selva_view_tool.git'

@@ -415,8 +415,10 @@ end
     ### En los initializers se pueden sobreescribir funciones de las gemas
     
     ### No se puede modificar directamente el codigo de gemas como Bootstrap
+    # Instalacion bootstrap y jquery https://www.youtube.com/watch?v=bn9arlhfaXc
 
-    
+    # Como crear y usar una gema propia en tu proyecto
+    # https://www.udemy.com/course/professional-rails-5-development-course/learn/lecture/6380354
     
 ```
 

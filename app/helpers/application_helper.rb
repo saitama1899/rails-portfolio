@@ -24,4 +24,8 @@ module ApplicationHelper
         end
     end
 
+    def copyright_generator
+        EricSelvaViewTool::Renderer.copyright 'Eric Selva', 'All rights reserved'
+    end
+
 end
