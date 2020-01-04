@@ -13,13 +13,7 @@
 
   <body>
     
-    <div>
-      <div><%= link_to "Inicio", root_path %></div>
-      <div><%= link_to "Sobre Mi", about_me_path %></div>
-      <div><%= link_to "Contactar", contact_path %></div>
-      <div><%= link_to "Blog", blogs_path %></div>
-      <div><%= link_to "Portfolios", portfolios_path %></div>
-    </div>
+    <%= render "shared/nav", location: "top" %>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

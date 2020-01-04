@@ -10,7 +10,7 @@ class PortfoliosController < ApplicationController
     end
 
     def show
-      @page_title = @portfolio.title
+        @page_title = @portfolio.title
     end
 
     def new

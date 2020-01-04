@@ -290,7 +290,7 @@ end
       <p>Gracias por visitarnos desde <%= session[:source] %></p>
     <% end %>
 ```
-### Apuntes Rails
+### Vistas Rails
 
 > En archivos html.erb
 ```js
@@ -322,6 +322,17 @@ end
     def index
         @page_title = "My Portfolios"
     end
+
+    // Pasar parametros por los render (por ejemplo en el Nav bar)
+    // _nav.html.erb
+    <div class = "<%= location %>">
+        <div><%= link_to "Inicio", root_path %></div>
+        <div><%= link_to "Sobre Mi", about_me_path %></div>
+    </div>
+    // En el layout deseado (por ejemplo blog)
+    <%= render "shared/nav", location: "bottom" %>
+    // Indicar layout en el controller de blog
+    layout "blog"
 ```
 
 ```bash
