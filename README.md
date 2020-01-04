@@ -16,29 +16,9 @@ def new
     @blog = Blog.new
 end
 ```
-### Comandos GitHub
 
-```bash
-    git init
-    git status
-    git add .
-    git add [file]
-    git commit -m 'Breve descripcion'
-    git remote add origin [url.git]
-    git push -u origin master
+##### Rails
 
-    git branch
-    git checkout -b 'my-great-feature'
-    git checkout master
-    git merge my-great-feature
-
-    # Tras hacer add y commit en un branch
-    git push origin my-great-feature
-    # Se puede confirmar el merge desde github
-
-    # Actualizar tu codigo
-    git pull
-```
 ### Comandos Rails
 
 ```bash
@@ -73,7 +53,7 @@ end
 
 ```
 
-### Routes Rails
+### Routes
 
 ```bash
 
@@ -95,7 +75,7 @@ end
     # Nombre del controller: toggle_status Ruta en vista: toggle_status_blog_path(blog)
 
 ```
-### DB Rails
+### DB y Modelos
 
 ```bash
 
@@ -199,8 +179,24 @@ end
     ### Ahorrar tiempo de las queries listando items en el controller con modelos relacionados
     # @portfolios = Portfolio.all
     @portfolios = Portfolio.includes(:technologies)
+
+    ### Concerns para compartir funciones comunes entre modelos
+    # concerns/placeholder.rb
+    module Placeholder
+        extend ActiveSupport::Concern
+
+        def self.image_generator(height:, width:)
+            "http://placehold.it/#{height}x#{width}"
+        end
+    end
+    # En el modelo
+    include Placeholder
+
+    def set_defaults
+        self.badge ||= Placeholder.image_generator(height: '250', width: '250')
+    end
 ```
-### Authentication Rails con gema Devise
+### Authentication con gema Devise
 
 ```bash
     # https://github.com/plataformatec/devise
@@ -275,8 +271,9 @@ end
       <%= link_to "Register", new_user_registration_path %>
       <%= link_to "Login", new_user_session_path %>
     <% end %>
+    # Puedes refactorizar este codigo en un helper
 ```
-### Rails Sessions
+### Sessions
 
 ```bash
     ### Crear una sesion en el aplication controller
@@ -351,22 +348,43 @@ end
     // Render: Cuando el codigo contiene en su mayoria html
     // Helper: Cuando contiene en su mayoria Ruby y condicionales
     
-```
-
-```bash
-    # Concerns para compartir funciones comunes entre modelos
-    # concerns/placeholder.rb
-    module Placeholder
-        extend ActiveSupport::Concern
-
-        def self.image_generator(height:, width:)
-            "http://placehold.it/#{height}x#{width}"
+    // Ejemplo de refactorizacion de codigo de vista a helper
+    // Vista
+    <% if session[:source] %>
+      <p>Gracias por visitarnos desde <%= session[:source] %></p>
+    <% end %>
+    // Helper
+    def source_helper
+        if session[:source]
+            greeting = "Gracias por visitarnos desde #{session[:source]}"
+            content_tag(:p, greeting, class: "source-greeting")
         end
     end
-    # En el modelo
-    include Placeholder
+    // Vista (post refactorizacion)
+    <%= source_helper %>
+    
+```
 
-    def set_defaults
-        self.badge ||= Placeholder.image_generator(height: '250', width: '250')
-    end
+### Comandos GitHub
+
+```bash
+    git init
+    git status
+    git add .
+    git add [file]
+    git commit -m 'Breve descripcion'
+    git remote add origin [url.git]
+    git push -u origin master
+
+    git branch
+    git checkout -b 'my-great-feature'
+    git checkout master
+    git merge my-great-feature
+
+    # Tras hacer add y commit en un branch
+    git push origin my-great-feature
+    # Se puede confirmar el merge desde github
+
+    # Actualizar tu codigo
+    git pull
 ```
