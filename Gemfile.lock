@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/saitama1899/eric_selva_view_tool.git
-  revision: 2ba986908382690d13ac26c34c684c85523f0c33
-  specs:
-    eric_selva_view_tool (0.1.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -82,6 +76,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    eric_selva_view_tool (0.1.2)
     erubi (1.9.0)
     execjs (2.7.0)
     ffi (1.11.3-x64-mingw32)
@@ -200,7 +195,7 @@ DEPENDENCIES
   bootstrap (~> 4.4.1)
   byebug
   devise (~> 4.2)
-  eric_selva_view_tool!
+  eric_selva_view_tool (~> 0.1.2)
   friendly_id (~> 5.2.4)
   jbuilder (~> 2.7)
   puma (~> 4.1)
