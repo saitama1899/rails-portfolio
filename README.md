@@ -289,9 +289,9 @@ end
 ```
 ### Vistas Rails
 
-```liquid
-    ### Porcesa la lógica de ruby sin renderizar nada
-    <%  %>
+```bash
+    ### Porcesa la lógica de ruby sin renderizar nada 
+    <% %>
 
     # Permite renderizar variables
     <%=  %>
