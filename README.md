@@ -419,6 +419,9 @@ end
 
     # Como crear y usar una gema propia en tu proyecto
     # https://www.udemy.com/course/professional-rails-5-development-course/learn/lecture/6380354
+
+    ### Buena practica para instalar gemas
+    # Indicar en el gemfile la version exacta para evitar confilctos si actualizas la gema
     
 ```
 
