@@ -5,6 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta charset = "utf-8" />
+    <meta name = "viewport" content = "width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name = "keywords" content = "<%= @seo_keywords %>" />
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -14,20 +16,19 @@
 
   <body>
 
-    <%= render "shared/nav", location: "top" %>
-    
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <%= render "shared/nav" %>
+      
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
 
-    <p>Hola, <%= current_user.first_name %></p>
+      <p>Hola, <%= current_user.first_name %></p>
 
-    <%= login_helper %>
-
-    <%= yield %>
-
-    <%= source_helper %>
-
-    <%= copyright_generator %>
-
+      <main role="main" class="inner cover center-align">
+        <%= yield %>
+      </main>
+      <%= source_helper %>
+      <%= render "shared/footer" %>
+    </div>
   </body>
 </html>

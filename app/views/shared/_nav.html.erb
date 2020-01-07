@@ -1,7 +1,13 @@
-<div class = "<%= location %>">
-    <div><%= link_to "Inicio", root_path %></div>
-    <div><%= link_to "Sobre Mi", about_me_path %></div>
-    <div><%= link_to "Contactar", contact_path %></div>
-    <div><%= link_to "Blog", blogs_path %></div>
-    <div><%= link_to "Portfolio", portfolios_path %></div>
-</div>
+<header class="masthead mb-auto">
+    <div class="inner">
+        <h3 class="masthead-brand">Eric Selva</h3>
+        <nav class="nav nav-masthead justify-content-center">
+            <%= link_to "Inicio", root_path, class: 'nav-link' %>
+            <%= link_to "Sobre Mi", about_me_path, class: 'nav-link' %>
+            <%= link_to "Contactar", contact_path, class: 'nav-link' %>
+            <%= link_to "Blog", blogs_path, class: 'nav-link' %>
+            <%= link_to "Portfolio", portfolios_path, class: 'nav-link' %>
+            <%= login_helper 'nav-link' %>
+        </nav>
+    </div>
+</header>
