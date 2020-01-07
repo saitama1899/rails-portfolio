@@ -272,6 +272,7 @@ end
       <%= link_to "Login", new_user_session_path %>
     <% end %>
     # Puedes refactorizar este codigo en un helper
+    # Para implementar la authorization con la gema petergate hay que refactorizar el metodo guest_user para que sea un modelo que descienda de la clase User
 ```
 ### Sessions
 
@@ -422,6 +423,28 @@ end
 
     ### Buena practica para instalar gemas
     # Indicar en el gemfile la version exacta para evitar confilctos si actualizas la gema
+    
+```
+### Authorization 
+
+```bash
+    # Instalar gema petergate
+    # Si usas guests necesitas crear un modelo que descienda de User
+    class GuestUser < User
+        attr_accessor :name, :first_name, :last_name, :email
+    end
+    # En el concern 
+    def current_user
+        super || guest_user
+    end
+    def guest_user
+        guest = GuestUser.new
+        guest.name = "Guest User"
+        guest.first_name = "Guest"
+        guest.last_name = "User"
+        guest.email = "guest@example.com"
+        guest
+    end
     
 ```
 

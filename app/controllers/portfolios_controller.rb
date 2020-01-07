@@ -3,6 +3,9 @@ class PortfoliosController < ApplicationController
 
     layout "portfolio"
 
+    # Para la autorizacion del rol de usuarios que pueden publicar en el blog y los que no
+    access all: [:show, :index, :ruby_on_rails], user: {except: [:destroy, :new, :create, :update, :edit]}, site_admin: :all
+
     def index
         # @portfolio_items = Portfolio.all
         @portfolio_items = Portfolio.includes(:technologies)

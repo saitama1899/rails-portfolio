@@ -5,6 +5,9 @@ class BlogsController < ApplicationController
   # Cambiar a layout personalizado
   layout "blog"
 
+  # Para la autorizacion del rol de usuarios que pueden publicar en el blog y los que no
+  access all: [:show, :index], user: {except: [:destroy, :new, :create, :update, :edit]}, site_admin: :all
+  
   # GET /blogs
   # GET /blogs.json
   def index

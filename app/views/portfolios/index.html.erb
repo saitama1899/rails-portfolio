@@ -1,5 +1,5 @@
 <h1>Portfolio items</h1>
 
-<%= link_to 'Nuevo portfolio', new_portfolio_path %>
+<%= link_to 'Nuevo portfolio', new_portfolio_path if logged_in?(:site_admin) %>
 
 <%= render partial: @portfolio_items, spacer_template: 'portfolio_ruler' %>
