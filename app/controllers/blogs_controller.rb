@@ -3,7 +3,7 @@ class BlogsController < ApplicationController
   # Antes de cada accion de las indicadas ejecuta la función (action) set_blog 
 
   # Cambiar a layout personalizado
-  layout "blog"
+  # layout "blog"
 
   # Para la autorizacion del rol de usuarios que pueden publicar en el blog y los que no
   access all: [:show, :index], user: {except: [:destroy, :new, :create, :update, :edit]}, site_admin: :all

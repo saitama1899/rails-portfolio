@@ -1,7 +1,7 @@
 class PortfoliosController < ApplicationController
     before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
 
-    layout "portfolio"
+    # layout "portfolio"
 
     # Para la autorizacion del rol de usuarios que pueden publicar en el blog y los que no
     access all: [:show, :index, :ruby_on_rails], user: {except: [:destroy, :new, :create, :update, :edit]}, site_admin: :all
